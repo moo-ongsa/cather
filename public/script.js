@@ -1,9 +1,21 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+
+/*
+localhost 
+    host: "/",
+    path: "cather",
+    port: 9000,
+heroku
+    host: "https://cather-peer-server.herokuapp.com"
+    path: "cather",
+    port: 9000,
+*/
 const myPeer = new Peer(undefined, {
     secure: true,
-    host: 'cather.herokuapp.com',
-    port: '443'
+    // host: "/",
+    host: "https://cather-peerjs-server.herokuapp.com",
+    port: 443,
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -23,11 +35,13 @@ navigator.mediaDevices.getUserMedia({
     })
 
     socket.on('user-connected', userId => {
+        console.log("🚀 ~ file: script.js ~ line 27 ~ userId", userId)
         connectToNewUser(userId, stream)
     })
 })
 
 socket.on('user-disconnected', userId => {
+    console.log("🚀 ~ user-disconnected userId", userId, " peers", peers)
     if (peers[userId]) peers[userId].close()
 })
 
