@@ -1,20 +1,38 @@
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
+const canvas = document.getElementById('canvas-cather')
+const canvasContext = canvas.getContext('2d')
 canvas.width = 960
 canvas.height = 470
 
-//cather_style_map width tiles = 58
-const conllisionsMap = []
 
-for (let i = 0; i < collisions.length; i += 58) {
-    conllisionsMap.push(collisions.slice(i, 58 + i))
-}
 
+//inintial data 
+let lastKey = ''
+let keyPressed = ''
+let waterAnimationTimeframe = 0
+const conllisionsMap = [] //cather_style_map width tiles = 58
 const boundaries = []
 const localStorageOffset = JSON.parse(localStorage.getItem('offset'))
 const offset = {
     x: localStorageOffset?.x || -800,
     y: localStorageOffset?.y || -780,
+}
+const keys = {
+    w: {
+        pressed: false
+    },
+    a: {
+        pressed: false
+    },
+    s: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    },
+}
+
+for (let i = 0; i < collisions.length; i += 58) {
+    conllisionsMap.push(collisions.slice(i, 58 + i))
 }
 
 conllisionsMap.forEach((row, i) => {
@@ -107,22 +125,6 @@ const water = new Sprite({
     }
 })
 
-const keys = {
-    w: {
-        pressed: false
-    },
-    a: {
-        pressed: false
-    },
-    s: {
-        pressed: false
-    },
-    d: {
-        pressed: false
-    },
-}
-
-const movables = [background, ...boundaries, foreground, water]
 
 const playerMovement = {
     up: () => {
@@ -171,13 +173,12 @@ const playerMovement = {
     }
 }
 
-function startTime() {
-    water.image = water.sprites['water' + ((test % 4) + 1)]
-    test++
-    setTimeout(startTime, 1000);
+function waterAnimation() {
+    water.image = water.sprites['water' + ((waterAnimationTimeframe % 4) + 1)]
+    waterAnimationTimeframe++
+    setTimeout(waterAnimation, 1000);
 }
 
-let lastKey = ''
 
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
@@ -223,6 +224,8 @@ function checkBoundaries(boundaries) {
 
     return moving
 }
+
+const movables = [background, ...boundaries, foreground, water]
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -284,8 +287,8 @@ function animate() {
     }
 }
 animate()
+waterAnimation()
 
-let keyPressed = ''
 
 window.addEventListener('keypress', (e) => {
 

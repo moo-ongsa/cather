@@ -12,6 +12,10 @@
 </script>
 <script src="https://unpkg.com/peerjs@1.4.5/dist/peerjs.min.js" defer></script>
 <script src="/socket.io/socket.io.js" defer></script>
+<script src="data/collisions.js"></script>
+<script src="modules/boundary.js"></script>
+<script src="modules/sprite.js"></script>
+<script src="game.js" defer></script>
 <script src="script.js" defer></script>
 <style>
     #video-grid {
@@ -26,10 +30,14 @@
         object-fit: cover;
         background-color: black;
     }
+    /* body {
+        background: black;
+    } */
 </style>
 
 <body>
     Video Grid
+    <canvas id="canvas-cather"></canvas>
     <div id="test"></div>
     <div id="video-grid"></div>
 </body>
