@@ -14,7 +14,7 @@ heroku
 const myPeer = new Peer(undefined, {
     secure: true,
     // host: "/",
-    host: "https://cather-peerjs-server.herokuapp.com",
+    host: "cather-peerjs-server.herokuapp.com",
     port: 443,
 })
 const myVideo = document.createElement('video')
