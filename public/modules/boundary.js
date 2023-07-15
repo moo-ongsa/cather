@@ -9,7 +9,7 @@ class Boundary {
     }
 
     draw() {
-        canvasContext.fillStyle = 'transparent'
+        canvasContext.fillStyle = 'rgba(255,0,0,0)' //rgba(255,0,0,0.5)
         canvasContext.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }

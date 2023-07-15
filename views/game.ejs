@@ -9,6 +9,11 @@
 </head>
 <script>
     const ROOM_ID = "<%= roomId %>"
+    const currentUserId = "<%= currentUserId %>"
+    const CLIENT_ID = window.localStorage.getItem("clientId");
+    if(!CLIENT_ID){
+        window.localStorage.setItem(currentUserId)
+    }
 </script>
 <script src="data/collisions.js"></script>
 <script src="game.js" defer></script>
