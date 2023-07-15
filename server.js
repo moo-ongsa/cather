@@ -1,4 +1,6 @@
 const express = require("express");
+
+const serverless = require("serverless-http");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
@@ -10,7 +12,8 @@ var currentUserId = "";
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use('/netlify/server')
 
 app.get("/", (req, res) => {
   // res.redirect(`/${uuidV4()}`)
@@ -87,8 +90,11 @@ io.on("connection", (socket) => {
   });
   socket.on("join-room", (roomId, userPeerId) => {
     socket.join(roomId);
-    console.log("🚀 ~ file: server.js:89 ~ socket.on ~ userPeerId:", userPeerId)
-    console.log("🚀 ~ file: server.js:90 ~ socket.on ~ roomId:", roomId)
+    console.log(
+      "🚀 ~ file: server.js:89 ~ socket.on ~ userPeerId:",
+      userPeerId
+    );
+    console.log("🚀 ~ file: server.js:90 ~ socket.on ~ roomId:", roomId);
     // console.log(
     //   "🚀 ~ file: server.js ~ line 29 ~ socket.on ~ socket",
     //   socket.rooms
