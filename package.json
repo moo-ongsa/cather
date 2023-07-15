@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "export NODE_ENV=development && nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "node server.js"
+    "deploy": "node server.js",
+    "startnetlify": "./node_modules/.bin/netlify-lambda serve src"
   },
   "keywords": [],
   "author": "",
