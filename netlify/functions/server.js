@@ -12,8 +12,7 @@ var currentUserId = "";
 
 // set the view engine to ejs
 app.set("view engine", "ejs");
-// app.use(express.static("public"));
-app.use("/netlify/server");
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   // res.redirect(`/${uuidV4()}`)
